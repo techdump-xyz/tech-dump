@@ -16,7 +16,6 @@ type Props = CollectionEntry<'blog'>;
 
 const {posts, tag} = Astro.props;
 const currentTagPosts = getPostsByTag(posts, tag);
-// console.log(currentTagPosts);
 ---
 <BasePage title={`Tag | ${tag}`}>
 	<main>
@@ -34,4 +33,22 @@ const currentTagPosts = getPostsByTag(posts, tag);
 			</ul>
 		</section>
 	</main>
+	<style>
+		ul {
+			list-style-type: none;
+			padding: unset;
+		}
+		ul li {
+			display: flex;
+		}
+		ul li :global(time) {
+			flex: 0 0 130px;
+			font-style: italic;
+			@apply text-gb-dm-bg4 dark:text-gb-dm-fg4;
+		}
+		ul li a:visited {
+			@apply text-gb-dm-light-purple;
+			/* color: #8e32dc; */
+		}
+	</style>
 </BasePage>
