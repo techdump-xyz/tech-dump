@@ -6,9 +6,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+const posts = (await getCollection('blog'))
+	.sort(
+		(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+	);
 ---
 
 <!DOCTYPE html>
@@ -26,10 +27,11 @@ const posts = (await getCollection('blog')).sort(
 			ul li :global(time) {
 				flex: 0 0 130px;
 				font-style: italic;
-				color: #595959;
+				@apply text-gb-dm-bg4 dark:text-gb-dm-fg4;
 			}
 			ul li a:visited {
-				color: #8e32dc;
+				@apply text-gb-dm-light-purple;
+				/* color: #8e32dc; */
 			}
 		</style>
 	</head>

@@ -13,8 +13,20 @@ import { SITE_TITLE } from '../consts';
 		<HeaderLink href="/about">About</HeaderLink>
 		<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
 		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
+		<button id="change_color">change color</button>
 	</nav>
 </header>
+<script>
+	const btn = document.getElementById("change_color") as HTMLButtonElement;
+
+	btn.onclick = () => {
+		if (document.documentElement.classList.contains("dark")) {
+			document.documentElement.classList.remove("dark");
+		} else {
+			document.documentElement.classList.add("dark");
+		}
+	};
+</script>
 <style>
 	header {
 		margin: 0em 0 2em;

@@ -3,17 +3,18 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
+* {border-radius: 4px;}
 body {
-	font-family: Verdana, sans-serif;
+	font-family: 'JetBrains Mono', monospace;
 	margin: auto;
-	padding: 20px;
-	max-width: 65ch;
+	padding: 4rem 2rem 0;
+	max-width: 48rem;
 	text-align: left;
-	background-color: #fff;
+	@apply bg-gb-dm-fg0 text-gb-dm-bg0 dark:bg-gb-dm-bg0-hard dark:text-gb-dm-fg0; 
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	line-height: 1.5;
-	color: #444;
+	/* color: #444; */
 }
 h1,
 h2,
@@ -23,10 +24,12 @@ h5,
 h6,
 strong,
 b {
-	color: #222;
+	@apply text-gb-lm-light-green dark:text-gb-dark-green;
+	/* @apply text-gb-lm-light-aqua dark:text-gb-dark-aqua; */
 }
 a {
-	color: #3273dc;
+	@apply text-gb-lm-light-purple dark:text-gb-dark-purple
+	/* @apply text-gb-lm-light-orange dark:text-gb-dark-orange; */
 }
 nav a {
 	margin-right: 10px;
@@ -50,7 +53,7 @@ img {
 }
 code {
 	padding: 2px 5px;
-	background-color: #f2f2f2;
+	@apply italic bg-gb-dm-light-gray text-gb-dark-red dark:bg-gb-dm-bg0 dark:text-gb-lm-light-orange;
 }
 pre {
 	padding: 1rem;
@@ -59,9 +62,14 @@ pre > code {
 	all: unset;
 }
 blockquote {
-	border: 1px solid #999;
-	color: #222;
+	border: 1px solid;
+	@apply border-gb-dm-bg1 dark:border-gb-dm-fg1;
+	/* color: #222; */
 	padding: 2px 0px 2px 20px;
 	margin: 0px;
 	font-style: italic;
+}
+mark {
+	padding: 0 .4rem;
+	@apply bg-gb-dark-yellow;
 }
