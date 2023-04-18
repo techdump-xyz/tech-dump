@@ -1,0 +1,37 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import BasePage from '../../layouts/BasePage.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import getUniqueTags, {getPostsByTag, toSlug} from '../../utils/manipulateTags';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const tags = getUniqueTags(posts);
+	return tags.map(tag => ({
+		params: {tag: toSlug(tag)},
+		props: {tag, posts}
+	}))
+}
+type Props = CollectionEntry<'blog'>;
+
+const {posts, tag} = Astro.props;
+const currentTagPosts = getPostsByTag(posts, tag);
+// console.log(currentTagPosts);
+---
+<BasePage title={`Tag | ${tag}`}>
+	<main>
+		<section>
+			<ul>
+				{
+					currentTagPosts
+						.map(post => (
+							<li>
+								<FormattedDate date={post.data.pubDate} />
+								<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+							</li>
+						))
+				}
+			</ul>
+		</section>
+	</main>
+</BasePage>

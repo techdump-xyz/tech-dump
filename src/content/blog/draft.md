@@ -2,7 +2,9 @@
 title: "Draft post"
 description: "Testing random features"
 pubDate: "Jul 08 2022"
-draft: true
+tags:
+    - JavaScript
+    - Tutorial
 ---
 
 Hello this is draft and should no be visible

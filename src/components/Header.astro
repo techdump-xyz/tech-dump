@@ -10,6 +10,7 @@ import { SITE_TITLE } from '../consts';
 	<nav>
 		<HeaderLink href="/">Home</HeaderLink>
 		<HeaderLink href="/blog">Blog</HeaderLink>
+		<HeaderLink href="/tags">Tags</HeaderLink>
 		<HeaderLink href="/about">About</HeaderLink>
 		<HeaderLink href="https://twitter.com/astrodotbuild" target="_blank">Twitter</HeaderLink>
 		<HeaderLink href="https://github.com/withastro/astro" target="_blank">GitHub</HeaderLink>
@@ -22,8 +23,10 @@ import { SITE_TITLE } from '../consts';
 	btn.onclick = () => {
 		if (document.documentElement.classList.contains("dark")) {
 			document.documentElement.classList.remove("dark");
+			localStorage.theme = "light";
 		} else {
 			document.documentElement.classList.add("dark");
+			localStorage.theme = "dark";
 		}
 	};
 </script>
