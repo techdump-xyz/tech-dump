@@ -1,20 +1,14 @@
 ---
-import { toSlug } from '../../utils/manipulateTags';
+import { pairTagsWithColor, toSlug } from '../../utils/manipulateTags';
 import Tag from './Tag.astro';
 
 export interface Props {tags: Array<string>}
 const {tags} = Astro.props;
 // const tags = "abcdefghijklmnopqrstuvwxyz".split("");
+const tagsWithColor = pairTagsWithColor(tags);
+console.log(tagsWithColor);
 ---
 
-<!-- TODO make every tag different color -->
 <nav class="flex flex-wrap gap-2 py-2">
-    {tags.map(tag => <Tag href={toSlug(tag)}>{tag}</Tag>)}
+    {tagsWithColor.map(data => <Tag color={data.color} href={data.tag}>{data.tag}</Tag>)}
 </nav>
-<style>
-    a:first-child { @apply bg-gb-dark-green }
-    a:nth-child(2n) { @apply  bg-gb-dark-purple }
-    a:nth-child(3n) { @apply bg-gb-dark-blue }
-    a:nth-child(5n) { @apply bg-gb-dark-aqua }
-    a:nth-child(11n) { @apply bg-gb-dark-orange }
-</style>

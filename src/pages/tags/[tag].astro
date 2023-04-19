@@ -8,7 +8,7 @@ export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	const tags = getUniqueTags(posts);
 	return tags.map(tag => ({
-		params: {tag: toSlug(tag)},
+		params: {tag: tag},
 		props: {tag, posts}
 	}))
 }

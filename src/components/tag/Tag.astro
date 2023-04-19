@@ -1,11 +1,24 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-export interface Props extends HTMLAttributes<'a'> {}
+export interface Props extends HTMLAttributes<'a'> {
+	color: string;
+}
 
-const { href, class: className, ...props } = Astro.props;
+const { href, color, class: className, ...props } = Astro.props;
 ---
 
-<a href={`/tags/${href}`} class:list={["text-gb-dm-bg0 dark:text-gb-dm-fg0 py-1 px-2 m-0",className]} {...props}>
+<a 
+	href={`/tags/${href}`} 
+	class:list={["text-gb-dm-bg0 dark:text-gb-dm-fg0 flex py-1 m-0", className]} 
+	{...props}
+>
 	<slot />
 </a>
+
+<style define:vars={{color}}>
+	a::before {
+		content: "#";
+		color: var(--color);
+	}
+</style>
