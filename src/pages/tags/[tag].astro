@@ -2,14 +2,15 @@
 import { CollectionEntry, getCollection } from 'astro:content';
 import BasePage from '../../layouts/BasePage.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
-import getUniqueTags, {getPostsByTag, toSlug} from '../../utils/manipulateTags';
+import getUniqueTags, {generateColorFromText, getPostsByTag, toSlug} from '../../utils/manipulateTags';
+import { getPublishedPosts } from '../../utils/manipulatePosts';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	const tags = getUniqueTags(posts);
 	return tags.map(tag => ({
 		params: {tag: tag},
-		props: {tag, posts}
+		props: {tag, posts: getPublishedPosts(posts)}
 	}))
 }
 type Props = CollectionEntry<'blog'>;
@@ -17,7 +18,7 @@ type Props = CollectionEntry<'blog'>;
 const {posts, tag} = Astro.props;
 const currentTagPosts = getPostsByTag(posts, tag);
 ---
-<BasePage title={`Tag | ${tag}`}>
+<BasePage title={`Tag | #${tag}`}>
 	<main>
 		<section>
 			<ul>

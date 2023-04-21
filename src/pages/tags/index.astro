@@ -1,10 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import BasePage from "../../layouts/BasePage.astro";
-import getUniqueTags, { toSlug } from "../../utils/manipulateTags";
+import getUniqueTags, { getPostsByTag, toSlug } from "../../utils/manipulateTags";
 import TagWrapper from "../../components/tag/TagWrapper.astro";
+import { getPublishedPosts } from "../../utils/manipulatePosts";
 
-const posts = await getCollection("blog");
+const posts = getPublishedPosts(await getCollection("blog"))
 const tags = getUniqueTags(posts);
 ---
 <BasePage title="Tags">
