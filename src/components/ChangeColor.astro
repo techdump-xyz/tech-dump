@@ -1,0 +1,28 @@
+---
+import { HTMLAttributes } from "astro/types";
+
+export interface Props extends HTMLAttributes<"button"> {}
+const { class: className } = Astro.props;
+---
+<button 
+    id="change_color" 
+    class:list={["w-full flex justify-end items-center", className]} 
+>
+    <svg width="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
+        <path class="dark:fill-gb-dm-fg0 fill-gb-dm-bg0-hard" d="M8,256C8,393,119,504,256,504S504,393,504,256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z" transform="translate(-8 -8)"/>
+    </svg>
+</button>
+
+<script>
+	const btn = document.getElementById("change_color") as HTMLButtonElement;
+
+	btn.onclick = () => {
+		if (document.documentElement.classList.contains("dark")) {
+			document.documentElement.classList.remove("dark");
+			localStorage.theme = "light";
+		} else {
+			document.documentElement.classList.add("dark");
+			localStorage.theme = "dark";
+		}
+	};
+</script>
