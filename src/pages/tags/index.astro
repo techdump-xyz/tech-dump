@@ -8,6 +8,7 @@ import { getPublishedPosts } from "../../utils/manipulatePosts";
 const posts = getPublishedPosts(await getCollection("blog"))
 const tags = getUniqueTags(posts);
 ---
-<BasePage title="Tags">
+<BasePage title="Tags" description="tags">
+    <p slot="title">Tags</p> 
     <TagWrapper tags={tags} />
 </BasePage>
