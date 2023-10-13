@@ -40,5 +40,5 @@ git config --global core.excludesfile ~/.gitignore_global
 ```
 And finally you don't need to think about it anymore.
 
-# Apps
-tig tui
+<!-- # Apps
+tig tui -->
