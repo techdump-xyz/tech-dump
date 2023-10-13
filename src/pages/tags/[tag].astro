@@ -1,58 +1,65 @@
 ---
-import { CollectionEntry, getCollection } from 'astro:content';
-import BasePage from '../../layouts/BasePage.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
-import getUniqueTags, { generateColorFromText, getPostsByTag } from '../../utils/manipulateTags';
-import { getPublishedPosts } from '../../utils/manipulatePosts';
-import Tag from '../../components/tag/Tag.astro';
+import { CollectionEntry, getCollection } from "astro:content";
+import BasePage from "../../layouts/BasePage.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import getUniqueTags, {
+  generateColorFromText,
+  getPostsByTag,
+} from "../../utils/manipulateTags";
+import { getPublishedPosts } from "../../utils/manipulatePosts";
+import Tag from "../../components/tag/Tag.astro";
+import { BASE } from "../../utils/baseUrl";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	const tags = getUniqueTags(posts);
-	return tags.map(tag => ({
-		params: {tag: tag},
-		props: {tag, posts: getPublishedPosts(posts)}
-	}))
+  const posts = await getCollection("blog");
+  const tags = getUniqueTags(posts);
+  return tags.map((tag) => ({
+    params: { tag: tag },
+    props: { tag, posts: getPublishedPosts(posts) },
+  }));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = {
+  posts: CollectionEntry<"blog">[];
+  tag: string;
+};
 
-const {posts, tag} = Astro.props;
+const { posts, tag } = Astro.props;
 const tagColor = generateColorFromText(tag);
 const currentTagPosts = getPostsByTag(posts, tag);
 ---
+
 <BasePage title={tag} description={`all my ${tag} knowledge`}>
-	<Tag slot="title" color={tagColor}>{tag}</Tag>
-	<main>
-		<section>
-			<ul>
-				{
-					currentTagPosts
-						.map(post => (
-							<li>
-								<FormattedDate date={post.data.pubDate} />
-								<a href={`/blog/${post.slug}/`}>{post.data.title}</a>
-							</li>
-						))
-				}
-			</ul>
-		</section>
-	</main>
-	<style>
-		ul {
-			list-style-type: none;
-			padding: unset;
-		}
-		ul li {
-			display: flex;
-		}
-		ul li :global(time) {
-			flex: 0 0 130px;
-			font-style: italic;
-			@apply text-gb-dm-bg4 dark:text-gb-dm-fg4;
-		}
-		ul li a:visited {
-			@apply text-gb-dm-light-purple;
-			/* color: #8e32dc; */
-		}
-	</style>
+  <Tag slot="title" color={tagColor}>{tag}</Tag>
+  <main>
+    <section>
+      <ul>
+        {
+          currentTagPosts.map((post) => (
+            <li>
+              <FormattedDate date={post.data.pubDate} />
+              <a href={`${BASE}/blog/${post.slug}/`}>{post.data.title}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: unset;
+    }
+    ul li {
+      display: flex;
+    }
+    ul li :global(time) {
+      flex: 0 0 130px;
+      font-style: italic;
+      @apply text-gb-dm-bg4 dark:text-gb-dm-fg4;
+    }
+    ul li a:visited {
+      @apply text-gb-dm-light-purple;
+      /* color: #8e32dc; */
+    }
+  </style>
 </BasePage>

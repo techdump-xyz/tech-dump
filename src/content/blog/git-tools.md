@@ -2,7 +2,7 @@
 title: "Git tips and tricks"
 description: "Tips on how to configure and use git"
 pubDate: "May 16 2023"
-# published: true
+published: true
 ---
 
 # Using aliases
