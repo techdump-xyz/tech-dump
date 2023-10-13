@@ -1,1 +1,1 @@
-export const BASE = "/blog";
+export const BASE = "/tech-dump";
